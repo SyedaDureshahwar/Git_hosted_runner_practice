@@ -1,0 +1,26 @@
+name: HTML CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Display Repository Files
+        run: ls -la
+
+      - name: Verify index.html Exists
+        run: test -f index.html
+
+      - name: Print Success Message
+        run: echo "HTML file validation successful!"
