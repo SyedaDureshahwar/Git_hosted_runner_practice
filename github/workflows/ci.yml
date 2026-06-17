@@ -4,23 +4,29 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  validate-html:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Display Repository Files
+      - name: Show Current Directory
+        run: pwd
+
+      - name: List Files
         run: ls -la
 
-      - name: Verify index.html Exists
-        run: test -f index.html
+      - name: Validate HTML File Exists
+        run: |
+          if [ -f index.html ]; then
+            echo "HTML file found"
+          else
+            echo "HTML file not found"
+            exit 1
+          fi
 
-      - name: Print Success Message
-        run: echo "HTML file validation successful!"
+      - name: Success Message
+        run: echo "CI Pipeline Passed"
